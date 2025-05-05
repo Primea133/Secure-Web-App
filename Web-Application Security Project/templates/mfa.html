@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Manager</title>
+</head>
+<body>
+    <header>
+        <h2>Password Manager: Login</h2>
+    </header>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+    </nav>
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('mfa') }}" method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.otp.label }} {{ form.otp }}
+            </div>
+            <div>
+                {{ form.submit }}
+            </div>
+        </form>
+    </main>
+    {% block content %}{% endblock %}
+</body>
+</html>
